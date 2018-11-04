@@ -137,8 +137,16 @@ def main():
                         if opts.svn_log:
                             ch_path = path[5:].split(" (from")[0].replace("\n", "")
                         else:
+                            components = path.split("\t")
+                            change_type = components[0]
+                            ch_path = components[1]
+                            if change_type.startswith('R'):
+                                # this is a file rename
+                                # example:
+                                #   R100	prototype/Node.pde	code_swarm/Node.pde
+                                ch_path = components[2]
                             # git uses quotes if filename contains unprintable characters
-                            ch_path = path[2:].replace("\n", "").replace("\"", "")
+                            ch_path = ch_path.replace("\n", "").replace("\"", "")
                         event_list.append(Event(ch_path, date, author))
                         path = file_handle.readline()
                     
