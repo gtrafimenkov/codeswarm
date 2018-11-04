@@ -18,6 +18,6 @@ git log --name-status --pretty=format:'%n---------------------------------------
 
 cd $SD
 
-python convert_logs/convert_logs.py -s activity.log activity.xml
+python convert_logs/convert_logs.py -g activity.log activity.xml
 
 java -Xmx1000m -classpath dist/code_swarm.jar:lib/core.jar:lib/xml.jar:lib/vecmath.jar:. code_swarm default.config
